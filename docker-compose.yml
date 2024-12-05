@@ -1,0 +1,33 @@
+version: '3.10'
+
+services:
+  web:
+    build: .
+    ports:
+      - "${port}:${port}"
+    env_file: ./.env
+    restart: on-failure
+    volumes:
+      - .:/usr/src/backend/
+    depends_on:
+      - database
+
+  database:
+    image: postgres:14
+    ports:
+      - "${db_host_port}:${db_port}"
+    env_file: ./.env
+    restart: on-failure
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${db_name}
+      - POSTGRES_USER=${db_user}
+      - POSTGRES_PASSWORD=${db_password}
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres", "-d", "${db_name}" ]
+      retries: 5
+      interval: 5s
+
+volumes:
+  postgres_data:

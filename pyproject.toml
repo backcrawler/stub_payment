@@ -1,0 +1,122 @@
+[tool.poetry]
+name = "Stub payment MVP"
+version = "0.1"
+description = "Payment test task"
+authors = ["backcrawler"]
+
+[tool.poetry.dependencies]
+python = ">=3.11.5, <3.12"
+uvicorn = "0.29.0"
+pydantic = "2.6.4"
+pydantic-settings = "2.0.3"
+python-dotenv = "0.21.0"
+fastapi = "0.110.3"
+asyncpg = "0.28.0"
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.13.2"
+ruff = "^0.3.5"
+mypy = "^1.9.0"
+
+[tool.isort]
+line_length = 120
+py_version=39
+skip="migrations"
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+profile="black"
+extend_skip = [".venv"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+exclude = [
+    "tests",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "migration",
+    "migrations",
+    "*.j2",
+    "*.txt",
+]
+output-format = "full"
+
+[tool.ruff.lint]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+pep8-naming.classmethod-decorators = ["classmethod"]
+pep8-naming.staticmethod-decorators = ["staticmethod"]
+select = [
+    "F", "E", "W", "C90",
+    "N", "UP", "B", "A",
+    "T20", "Q", "PTH", "ARG"
+]
+extend-select = ["D201", "D202", "D400"]
+extend-ignore = ["F821", "N815"]
+
+[tool.ruff.lint.per-file-ignores]
+# init may always contain unused imports:
+"__init__.py" = ["E402", "F403", "F401"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+indent-style = "space"
+
+skip-magic-trailing-comma = false
+
+line-ending = "auto"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+force-single-line = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "double"
+
+[tool.mypy]
+python_version = "3.11"
+plugins = []
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+ignore_errors = false
+ignore_missing_imports = true
+implicit_reexport = false
+strict_optional = true
+strict_equality = true
+no_implicit_optional = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+warn_no_return = true
+exclude = [
+    "venv"
+]
+
+[pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
