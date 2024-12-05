@@ -1,3 +1,5 @@
+# Stub Payment Service
+
 ## ENV setup:
 
 File ".env" must be created in PROJECTROOT/stub_payment_service/configs and filled according to Settings class
@@ -9,7 +11,7 @@ PostgreSQL is used as DB for the project.
 
 ### DB setup:
 
-(Before this a database with name DBNAME must be created)
+(Before this a database with name DBNAME must be created, automated by docker compose)
 
 ```sql
 psql -h HOSTNAME -U USERNAME -f db_setup.sql DBNAME
@@ -32,5 +34,5 @@ python3 main.py
 ## App start (docker):
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
